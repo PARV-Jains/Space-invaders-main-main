@@ -1,0 +1,19 @@
+{
+  "name": "space-invaders",
+  "version": "1.0.0",
+  "description": "Story-driven, mobile-friendly, offline-first Space Invaders in TypeScript with a Supabase global leaderboard.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "vite": "^5.4.0",
+    "vite-plugin-pwa": "^0.20.1"
+  }
+}

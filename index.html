@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#05060f" />
+    <meta name="description" content="Nebula Vanguard - a story-driven, offline-first Space Invaders game built for GDG on Campus at IET DAVV." />
+    <title>Nebula Vanguard: Space Invaders</title>
+  </head>
+  <body>
+    <div id="app">
+      <canvas id="game"></canvas>
+
+      <!-- HUD -->
+      <div id="hud" class="hidden">
+        <div class="hud-row">
+          <span id="hud-score">SCORE 0</span>
+          <span id="hud-level">LVL 1</span>
+          <span id="hud-lives">♥♥♥</span>
+        </div>
+      </div>
+
+      <!-- Active powerup indicators -->
+      <div id="powerup-hud" class="hidden"></div>
+
+      <!-- Dynamic event warning banner -->
+      <div id="event-warning" class="hidden"></div>
+
+      <!-- Touch controls (mobile) — fire LEFT, direction RIGHT -->
+      <div id="touch-controls" class="hidden">
+        <button id="btn-fire" class="tc-btn tc-fire" aria-label="Fire">
+          <svg viewBox="-19 -13 38 26" width="1.2em" height="1.2em" style="display: block; pointer-events: none;">
+            <path d="M0 -13 L19 13 L6.33 6.5 L-6.33 6.5 L-19 13 Z" fill="currentColor" />
+            <rect x="-3" y="-2" width="6" height="10" fill="#00e5ff" />
+          </svg>
+        </button>
+        <div class="tc-dpad">
+          <button id="btn-left" class="tc-btn" aria-label="Move left">◀</button>
+          <button id="btn-right" class="tc-btn" aria-label="Move right">▶</button>
+        </div>
+      </div>
+
+      <!-- Overlay screens (menus, story, leaderboard) get injected here -->
+      <div id="overlay"></div>
+
+      <!-- Creator footer -->
+      <div id="footer">
+        Made by <a href="https://www.linkedin.com/in/parv-jain-91968a354" target="_blank" rel="noopener noreferrer">Parv Jain</a> <span class="amp">&</span> <a href="https://www.linkedin.com/in/vansh-a-00a5152b3/" target="_blank" rel="noopener noreferrer">Vansh Abroal</a>
+      </div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
