@@ -111,7 +111,11 @@ export class Game {
     if (history.state?.scene !== 'play') {
       history.pushState({ scene: 'play' }, '');
     }
-    this.tellStory(INTRO, () => this.startLevel());
+    if (INTRO.length > 0) {
+      this.tellStory(INTRO, () => this.startLevel());
+    } else {
+      this.startLevel();
+    }
   }
 
   private tellStory(beats: StoryBeat[], done: () => void) {
@@ -128,7 +132,7 @@ export class Game {
 
   private startLevel() {
     const def = LEVELS[this.levelIndex];
-    this.tellStory(def.story, () => {
+    const proceed = () => {
       this.scene = 'play';
       this.ui.clear();
       this.toggleHud(true);
@@ -158,7 +162,13 @@ export class Game {
       }
       this.sfx.levelUp();
       this.updateHud();
-    });
+    };
+
+    if (def.story && def.story.length > 0) {
+      this.tellStory(def.story, proceed);
+    } else {
+      proceed();
+    }
   }
 
   private buildShields() {
