@@ -27,10 +27,7 @@ export interface LevelDef {
 
 export const SKIP_TEXT = "I'll read the syllabus later.";
 
-export const INTRO: StoryBeat[] = [
-  { speaker: 'NARRATOR', text: 'You cleared JEE and got into IET DAVV.\nYou pack your bags and enter the hostel.\n\nThat was your first mistake.' },
-  { speaker: 'YOU', text: 'Mandatory attendance, terrible mess food,\nand a surprise Chapter 1 test tomorrow?!\n\nI\'m not going KT without a fight!' },
-];
+export const INTRO: StoryBeat[] = [];
 
 export const LEVELS: LevelDef[] = [
   {
