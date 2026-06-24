@@ -190,7 +190,7 @@ export class Landmine {
 export class Player {
   x = VIEW.w / 2;
   y = VIEW.h - 70;
-  w = 38; h = 26;
+  w = 46; h = 38;
   speed = 320;
   cooldown = 0;
   lives = 3;
@@ -270,18 +270,57 @@ export class Player {
       ctx.shadowBlur = 0;
     }
 
-    ctx.fillStyle = '#39ff14';
-    ctx.shadowBlur = 14; ctx.shadowColor = '#39ff14';
-    ctx.beginPath();
-    ctx.moveTo(0, -this.h / 2);
-    ctx.lineTo(this.w / 2, this.h / 2);
-    ctx.lineTo(this.w / 6, this.h / 4);
-    ctx.lineTo(-this.w / 6, this.h / 4);
-    ctx.lineTo(-this.w / 2, this.h / 2);
-    ctx.closePath();
-    ctx.fill();
-    ctx.fillStyle = '#00e5ff';
-    ctx.fillRect(-3, -2, 6, 10);
+    // Detailed pixel-art drawing with neon shadow
+    ctx.shadowBlur = 12;
+    ctx.shadowColor = '#00e5ff';
+
+    const SHIP_ROWS = [
+      '...........O...........',
+      '..........OWO..........',
+      '..........OBO..........',
+      '.........OABAO.........',
+      '.........OABAO.........',
+      '........OAABAAO........',
+      '.......OACABACAO.......',
+      '......OACABBBACAO......',
+      '.....OACAKKDKKACAO.....',
+      '.....OACAKKKKKACAO.....',
+      '....OACAOOKKKOACAO....',
+      '...OACAOOKKKKKOACAO...',
+      '..OACAOOKKKKKKKOACAO..',
+      '.OACAOOKKKKKKKKKKOACAO.',
+      'OAABO..OOBDODBOO..OBAAO',
+      '.OBBBO...OBBBO...OBBBO.',
+      '.ODFDO...ODFDO...ODFDO.',
+      '..ODO.....ODO.....ODO..',
+      '...O.......O.......O...',
+    ];
+
+    const PALETTE: Record<string, string> = {
+      'W': '#ffffff',
+      'A': '#cbd5e0',
+      'C': '#718096',
+      'K': '#2d3748',
+      'B': '#00e5ff',
+      'D': '#0055ff',
+      'F': '#88ecff',
+      'O': '#1a202c',
+    };
+
+    const startX = -this.w / 2;
+    const startY = -this.h / 2;
+
+    for (let r = 0; r < SHIP_ROWS.length; r++) {
+      const row = SHIP_ROWS[r];
+      for (let c = 0; c < row.length; c++) {
+        const char = row[c];
+        if (char !== '.' && char !== ' ') {
+          ctx.fillStyle = PALETTE[char] || '#ffffff';
+          ctx.fillRect(startX + c * 2, startY + r * 2, 2, 2);
+        }
+      }
+    }
+
     ctx.restore();
     ctx.shadowBlur = 0;
   }
