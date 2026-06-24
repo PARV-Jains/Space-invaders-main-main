@@ -28,12 +28,8 @@ export interface LevelDef {
 export const SKIP_TEXT = "I'll read the syllabus later.";
 
 export const INTRO: StoryBeat[] = [
-  { speaker: 'NARRATOR', text: 'The year is 2026.\n\nYou just got your admission letter to IET DAVV.\nYou\'ve never even seen the campus.' },
-  { speaker: 'NARRATOR', text: 'You survived JEE.\nYou survived counselling rounds.\nYou survived your parents asking\n"Beta, branch konsi mili?"' },
-  { speaker: 'NARRATOR', text: 'You packed your bags.\nYou said goodbye to home-cooked food.\nYou entered the hostel.\n\nThat was your first mistake.' },
-  { speaker: 'YOU', text: 'Wait... the mess serves THIS as dinner?\nAnd what do you mean attendance is mandatory?\nAND there\'s a quiz TOMORROW?!' },
-  { speaker: 'NARRATOR', text: 'But now... a greater threat emerges.\n\nTHE ENGINEERING EXPERIENCE™\n\nArmed with nothing but WiFi and chai,\nyou must survive your first year.' },
-  { speaker: 'YOU', text: 'They said college life would be fun.\nThey said "best 4 years of your life."\n\nThey lied.\n\nBut I\'m not going KT without a fight.' },
+  { speaker: 'NARRATOR', text: 'You cleared JEE and got into IET DAVV.\nYou pack your bags and enter the hostel.\n\nThat was your first mistake.' },
+  { speaker: 'YOU', text: 'Mandatory attendance, terrible mess food,\nand a surprise Chapter 1 test tomorrow?!\n\nI\'m not going KT without a fight!' },
 ];
 
 export const LEVELS: LevelDef[] = [
@@ -41,11 +37,7 @@ export const LEVELS: LevelDef[] = [
     name: 'First Internals',
     rows: 2, cols: 5, enemyHp: 1, speed: 0.6, fireRate: 0.1, bulletSpeed: 0.8,
     enemyNames: ['STRICT PROF', 'SURPRISE QUIZ'],
-    story: [
-      { speaker: 'CLASSMATE', text: 'Bro EMERGENCY!\nStrict Prof is taking surprise quiz!\nHe hasn\'t even finished Chapter 1!' },
-      { speaker: 'YOU', text: 'I literally came to college yesterday.\nI don\'t even know where my classroom is.\n\nBut if it has MCQs, I have luck.' },
-      { speaker: 'CLASSMATE', text: 'Also the Time Management aliens are here.\nThey attack anyone who sleeps past 8 AM.\n\nSo basically... all of us.' },
-    ],
+    story: [],
   },
   {
     name: 'Assignment Avalanche',
