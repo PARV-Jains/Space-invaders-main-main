@@ -190,11 +190,12 @@ export class Landmine {
 export class Player {
   x = VIEW.w / 2;
   y = VIEW.h - 70;
-  w = 46; h = 38;
+  w = 46; h = 46;
   speed = 320;
   cooldown = 0;
   lives = 3;
   invuln = 0;
+  flameTimer = 0;
 
   // Powerup state
   hasShield = false;
@@ -217,6 +218,7 @@ export class Player {
     this.x = clamp(this.x, this.w / 2, VIEW.w - this.w / 2);
     if (this.cooldown > 0) this.cooldown -= dt;
     if (this.invuln > 0) this.invuln -= dt;
+    this.flameTimer = (this.flameTimer + dt) % 1.0;
   }
 
   tryFire(): Bullet | null {
@@ -274,27 +276,55 @@ export class Player {
     ctx.shadowBlur = 12;
     ctx.shadowColor = '#00e5ff';
 
-    const SHIP_ROWS = [
-      '...........O...........',
-      '..........OWO..........',
-      '..........OBO..........',
-      '.........OABAO.........',
-      '.........OABAO.........',
-      '........OAABAAO........',
-      '.......OACABACAO.......',
-      '......OACABBBACAO......',
-      '.....OACAKKDKKACAO.....',
-      '.....OACAKKKKKACAO.....',
-      '....OACAOOKKKOACAO....',
-      '...OACAOOKKKKKOACAO...',
-      '..OACAOOKKKKKKKOACAO..',
-      '.OACAOOKKKKKKKKKKOACAO.',
-      'OAABO..OOBDODBOO..OBAAO',
-      '.OBBBO...OBBBO...OBBBO.',
-      '.ODFDO...ODFDO...ODFDO.',
-      '..ODO.....ODO.....ODO..',
-      '...O.......O.......O...',
+    const baseRows = [
+      '...........O...........', // 0
+      '..........OWO..........', // 1
+      '..........AWA..........', // 2
+      '.........OACAO.........', // 3
+      '.........OACAO.........', // 4
+      '........OACACAO........', // 5
+      '.......OACDFDCAO.......', // 6
+      '......OACDBFBDCAO......', // 7
+      '.....OACDBFFFBDCAO.....', // 8
+      '....OACDDBFFFBDDCAO....', // 9
+      '....OACDDDBFBDDDCAO....', // 10
+      '...OACADODDBDDODACAO...', // 11
+      '..OACAOOKKKDKKKOOACAO..', // 12
+      '.OACAOOKKKKKKKKKOOACAO.', // 13
+      'OAACAAOKKKKKKKKKOAACAAO', // 14
+      'OCKODOOKKODDDOKKOODOKCO', // 15
+      'OAODBDO.ODFBFDO.ODBDOAO', // 16
     ];
+
+    const flameFrames = [
+      [
+        '....B...ODFWFDO...B....', // 17
+        '........ODFBFDO........', // 18
+        '.........DFBFD.........', // 19
+        '..........FBF..........', // 20
+        '..........DBD..........', // 21
+        '...........D...........', // 22
+      ],
+      [
+        '....D...ODFBFDO...D....', // 17
+        '........ODFWFDO........', // 18
+        '.........DFBFD.........', // 19
+        '..........FBF..........', // 20
+        '..........BBB..........', // 21
+        '.......................', // 22
+      ],
+      [
+        '........ODFWFDO........', // 17
+        '........ODFBFDO........', // 18
+        '.........DFBFD.........', // 19
+        '..........FBF..........', // 20
+        '..........DBD..........', // 21
+        '...........B...........', // 22
+      ]
+    ];
+
+    const frameIdx = Math.floor(this.flameTimer * 12) % 3;
+    const SHIP_ROWS = [...baseRows, ...flameFrames[frameIdx]];
 
     const PALETTE: Record<string, string> = {
       'W': '#ffffff',
